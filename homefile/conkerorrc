@@ -1,0 +1,173 @@
+//-*- mode: js2 -*-//
+
+// Other
+require("clicks-in-new-buffer.js");
+can_kill_last_buffer = false;
+// Set to either OPEN_NEW_BUFFER or OPEN_NEW_BUFFER_BACKGROUND
+clicks_in_new_buffer_target = OPEN_NEW_BUFFER_BACKGROUND; // Now buffers open in background.
+clicks_in_new_buffer_button = 2;
+
+hints_ambiguous_auto_exit_delay = 0;
+ints_auto_exit_delay = 800;
+hints_display_url_panel = true;
+hint_digits="abcdefghijklmnopqrstuvwxyz";
+
+url_completion_use_history = true;
+url_completion_use_bookmarks = false;
+url_completion_use_webjumps = true;
+
+xkcd_add_title = true;
+
+require("page-modes/google-search-results.js");
+google_search_bind_number_shortcuts();
+
+download_buffer_automatic_open_target = OPEN_NEW_BUFFER_BACKGROUND;
+url_remoting_fn = load_url_in_new_buffer;
+
+// Enable the password manager
+Components.classes["@mozilla.org/login-manager;1"].getService(
+           Components.interfaces.nsILoginManager);
+/*-----------------------------------------------------------*/
+
+
+// Functions //
+// interactive("follow-new-buffer", null,
+//             function (I)
+//             {
+//                 var target = OPEN_NEW_BUFFER;
+//                 var element = yield I.read_browser_object("follow", "Follow", "links", target);
+//                 browser_element_follow(I.buffer, target, element);
+//             });
+function disable_scrollbars (buffer)
+{
+    buffer.browser.contentWindow.scrollbars.visible = false;
+}
+
+// Keys //
+// As a matter of courtesy to Vim
+define_key(content_buffer_normal_keymap, "j", "caret-forward-line");
+define_key(content_buffer_normal_keymap, "k", "caret-backward-line");
+define_key(content_buffer_normal_keymap, "h", "caret-cmd_scrollLeft");
+define_key(content_buffer_normal_keymap, "l", "caret-cmd_scrollRight");
+
+//define_key(content_buffer_normal_keymap, "d", "follow-new-buffer");
+// new bindings
+define_key(default_global_keymap, "C-w", "kill-current-buffer");
+
+// rebound from normal.js
+define_key(content_buffer_normal_keymap, "back_space", "go-back");
+define_key(content_buffer_normal_keymap, "S-back_space", "go-forward");
+
+// Keybindings
+define_key(content_buffer_normal_keymap, "M-left", "go-back");
+define_key(content_buffer_normal_keymap, "M-right", "go-forward");
+
+define_key(default_global_keymap, "C-w", "kill-current-buffer");
+define_key(default_global_keymap, "C-left", "buffer-previous");
+define_key(default_global_keymap, "C-right", "buffer-next");
+define_key(default_global_keymap, "C-down", "switch-to-buffer");
+define_key(default_global_keymap, "C-up", "switch-to-buffer");
+
+//define_key(content_buffer_normal_keymap, "M-f", "follow-new-buffer");
+define_key(content_buffer_normal_keymap, "C-f", "follow-new-buffer-background");
+define_key(default_global_keymap, "C-t", "find-url-new-buffer");
+
+define_key(content_buffer_normal_keymap, "+", "zoom-in-text");
+define_key(content_buffer_normal_keymap, "=", "zoom-reset-text");
+define_key(content_buffer_normal_keymap, "-", "zoom-out-text");
+
+define_key(content_buffer_normal_keymap, "home","beginning-of-line");
+define_key(content_buffer_normal_keymap, "end","end-of-line");
+define_key(content_buffer_normal_keymap, "C-home","cmd_scrollTop");
+define_key(content_buffer_normal_keymap, "C-end","cmd_scrollBottom");
+define_key(content_buffer_normal_keymap, "f7", "caret-mode");
+
+
+// Webjumps //
+define_webjump("infostore", "http://infostore.org/search?s=%s");
+define_webjump("archlinux_wiki", "http://wiki.archlinux.org/index.php/Special:Search/%s");
+define_webjump("archlinux_aur", "http://aur.archlinux.org/packages.php?K=%s");
+define_webjump("lor_forum", "http://www.linux.org.ru/search.jsp?q=%s&include=all&date=year&section=0&username=&sort=1");
+define_webjump("lor_wiki", "http://www.linux.org.ru/wiki/en/Special:Search/?text=%s");
+define_webjump("lingvo", "http://lingvo.yandex.ru/en?text=%s&st_translate=on");
+define_webjump("github", "http://github.com/search?q=%s");
+add_delicious_webjumps("crazycode");
+
+define_webjump("g", "www.google.com/search?q=%s");
+define_webjump("d", "del.icio.us/crazycode/%s");
+define_webjump("blank", "about:blank");
+define_webjump("reader", "www.google.com/reader");
+
+// Variables //
+define_variable("editor_shell_command", "emacsclient");
+
+// Hooks //
+add_hook ("content_buffer_location_change_hook", disable_scrollbars);
+
+// Css //
+register_user_stylesheet('file:///home/tanglq/.conkeror.d/conkeror.css');
+
+// Preferences //
+session_pref("extensions.checkCompatibility", false);
+
+
+// Remember the last save directory for downloads
+{
+   let _save_path = get_home_directory();
+
+   function update_save_path(info) {
+       _save_path = info.target_file.parent.path;
+   }
+
+   add_hook("download_added_hook", update_save_path);
+
+   suggest_save_path_from_file_name = function (filename, buffer) {
+       let file = make_file(_save_path);
+       file.append(filename);
+       return file.path;
+   }
+}
+
+// delicious
+interactive("delicious-post",
+            "bookmark the page via delicious",
+            function (I) {
+                check_buffer(I.buffer, content_buffer);
+                var sendurl = 'https://api.del.icio.us/v1/posts/add?&url='+
+                    encodeURIComponent(I.buffer.display_uri_string)+
+                    '&description='+
+                    encodeURIComponent((yield I.minibuffer.read(
+                        $prompt = "name (required): ",
+                        $initial_value = I.buffer.title)))+
+                    '&tags='+
+                    encodeURIComponent((yield I.minibuffer.read(
+                        $prompt = "tags (space delimited): ")))+
+                    '&extended='+
+                    encodeURIComponent((yield I.minibuffer.read(
+                        $prompt = "extended description: ")));
+                var content = yield send_http_request(load_spec({uri: sendurl}));
+                I.window.minibuffer.message(content.responseText);
+            });
+
+interactive("delicious-post-link",
+            "bookmark the link via delicious",
+            function (I) {
+            bo = yield read_browser_object(I) ;
+            mylink = load_spec_uri_string(load_spec(encodeURIComponent(bo)));
+            check_buffer(I.buffer, content_buffer);
+            let sendurl = 'https://api.del.icio.us/v1/posts/add?&url=' +
+            mylink +
+             '&description=' +
+            encodeURIComponent((yield I.minibuffer.read($prompt = "name (required): " , $initial_value = bo.textContent))) +
+            '&tags=' + encodeURIComponent((yield I.minibuffer.read($prompt = "tags (space delimited): "))) +
+            '&extended=' + encodeURIComponent((yield I.minibuffer.read($prompt = "extended description: ")))
+            ;
+            var content = yield send_http_request(
+                      load_spec({uri: sendurl}));
+            I.window.minibuffer.message(content.responseText);
+            }, $browser_object = browser_object_links);
+
+define_key(default_global_keymap, "p", "delicious-post");
+define_key(default_global_keymap, "P", "delicious-post-link");
+
+define_webjump("del", "http://delicious.com/search?p=%s&chk=&context=userposts%7Ccrazycode&fr=del_icio_us&lc=");

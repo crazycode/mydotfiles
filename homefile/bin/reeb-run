@@ -1,0 +1,45 @@
+#!/bin/zsh
+REEB_DIR=~/seewi/reeb-trunk
+
+if [ $# -ne 1 ]
+then
+   echo "$0 <app path>"
+   echo "app path like website/www"
+   exit 1
+fi
+
+WORK_NAME=$1
+WORK_DIR=$REEB_DIR/$WORK_NAME
+
+alias rst='tmux send-keys -t 1 "cd $REEB_DIR" Enter "svn st" Enter'
+alias rup='tmux send-keys -t 1 "cd $REEB_DIR" Enter "svn up" Enter'
+alias rcls='tmux send-keys -t 1 "clear" Enter'
+alias r1='tmux select-pane -t 1'
+alias rh="cd $WORK_DIR"
+alias rdo="source reeb-run $WORK_NAME"
+
+printf "\033k$WORK_NAME\033\\"
+
+if [[ -d $WORK_DIR ]]; then
+    cd $WORK_DIR
+    tmux split-window -h "cd $REEB_DIR/ && /bin/zsh"
+    tmux split-window -t 1 -v "play run --deps"
+    tmux select-pane -t 0
+    cd $WORK_DIR
+else
+    echo "$WORK_DIR NOT Exists!"
+    exit 1
+fi
+
+
+#      split-window [-dhvP] [-l size | -p percentage] [-t target-pane] [shell-command]
+#                    (alias: splitw)
+#              Create a new pane by splitting target-pane: -h does a horizontal split and -v a vertical split; if neither is specified, -v is assumed.  The -l and -p options specify the
+#              size of the new pane in lines (for vertical split) or in cells (for horizontal split), or as a percentage, respectively.  All other options have the same meaning as for the
+#              new-window command.
+
+#      select-pane [-lDLRU] [-t target-pane]
+#                    (alias: selectp)
+#              Make pane target-pane the active pane in window target-window.  If one of -D, -L, -R, or -U is used, respectively the pane below, to the left, to the right, or above the
+#              target pane is used.  -l is the same as using the last-pane command.
+

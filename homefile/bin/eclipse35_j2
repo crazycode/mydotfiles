@@ -1,0 +1,3 @@
+#!/bin/bash
+export GDK_NATIVE_WINDOWS=true
+/opt/eclipse/eclipse-3.5/eclipse -vm /usr/lib/jvm/java-6-sun/bin/java -data /home/tanglq/.j2_workspace

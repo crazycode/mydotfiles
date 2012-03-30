@@ -1,0 +1,19 @@
+#!/bin/bash
+
+WM_TITLE="Emacs@"
+
+S1=`wmctrl -l|grep "$WM_TITLE"|wc -l`
+
+if [ $S1 -eq '0' ]; then
+    USER=`id | sed 's/uid=[0-9][0-9]*(\([^)]*\)).*/\1/'`
+    USERID=`id | sed 's/uid=\([0-9][0-9]*\)(\([^)]*\)).*/\1/'`
+    if [ ! -e /tmp/emacs$USERID/server ];
+    then
+        emacs --daemon &
+        while [ ! -e "/tmp/emacs$USERID/server" ] ; do sleep 1 ; done
+    fi
+    emacsclient -c &
+    sleep 0.5
+fi
+wmctrl -a "$WM_TITLE"
+wmctrl -r "$WM_TITLE" -b add,maximized_horz,maximized_vert

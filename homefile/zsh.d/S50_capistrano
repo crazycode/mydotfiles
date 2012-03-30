@@ -1,0 +1,20 @@
+#!/bin/zsh
+_cap_does_task_list_need_generating () {
+  if [ ! -f cap_tasks ]; then return 0;
+  else
+    accurate=$(stat -f%m ~/.zsh_cache/cap_tasks-$(echo $PWD | sha512sum))
+    changed=$(stat -f%m config/deploy.rb)
+    return $(expr $accurate '>=' $changed)
+  fi
+}
+
+_cap () {
+  if [ -f config/deploy.rb ]; then
+    if _cap_does_task_list_need_generating; then
+      cap -T | grep '^cap' | cut -d' ' -f2 >! ~/.zsh_cache/cap_tasks-$(echo $PWD | sha512sum)
+    fi
+    compadd `cat ~/.zsh_cache/cap_tasks-$(echo $PWD | sha512sum)`
+  fi
+}
+
+compdef _cap cap

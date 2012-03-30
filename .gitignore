@@ -1,0 +1,11 @@
+homefile/vimperator/info
+homefile/gitconfig
+homefile/wgetrc.d/*.txt
+homefile/config/fcitx/profile
+homefile/config/fcitx/table
+homefile/config/fcitx/*.dat
+homefile/config/fcitx/*.mb
+homefile/config/fcitx/*.log
+homefile/config/fcitx/*.tmp
+homefile/config/fcitx/log
+homefile/config/fcitx/pinyin

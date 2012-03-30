@@ -1,0 +1,3 @@
+#!/bin/bash
+export AWT_TOOLKIT=MToolkit
+/opt/magicdraw16.6/bin/mduml

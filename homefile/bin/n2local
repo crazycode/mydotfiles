@@ -1,0 +1,3 @@
+#!/bin/bash
+rm ~/.m2/settings.xml
+ln -s ~/.m2/local-settings.xml ~/.m2/settings.xml

@@ -1,0 +1,104 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'pp'
+require 'ya2yaml'
+require 'httparty'
+require 'active_support'
+require 'htmlentities'
+
+class Hash
+  # Replacing the to_yaml function so it'll serialize hashes sorted (by their keys)
+  #
+  # Original function is in /usr/lib/ruby/1.8/yaml/rubytypes.rb
+  def to_yaml( opts = {} )
+    YAML::quick_emit( object_id, opts ) do |out|
+      out.map( taguri, to_yaml_style ) do |map|
+        sort.each do |k, v|   # <-- here's my addition (the 'sort')
+          map.add( k, v )
+        end
+      end
+    end
+  end
+end
+
+
+class GoogleApi
+  include HTTParty
+  base_uri 'ajax.googleapis.com'
+  @@cache = {}
+
+  def self.translate(string, to, from)
+    # Google translate replaces {{foobar}} with (()) foobar. So replace with __ first
+    string.gsub!(/\{\{([a-z_.]+)\}\}/i, '__\1__')
+    translation = ''
+    response = nil
+    string.scan(/.{1,2000}\s*/).each do |chunk|
+      tries = 0
+      begin
+        response = get("/ajax/services/language/translate",
+          :query => {:langpair => "#{from}|#{to}", :q => chunk, :v => 1.0},
+          :format => :json)
+      rescue
+        tries += 1
+        puts("SLEEPING - retrying in 5...")
+        sleep(5)
+        retry if tries < 10
+      end
+      translation << response["responseData"]["translatedText"] if response["responseData"]
+    end
+    unless translation.blank?
+      translation.gsub!(/__([a-z_.]+)__/i, '{{\1}}')
+      HTMLEntities.new.decode(translation)
+    else
+      puts "NO TRANSLATION - #{response.inspect}"
+    end
+  end
+
+  def self.translate_with_cache(string, to, from)
+    @@cache[to] ||= {}
+    @@cache[to][string] ||= translate_without_cache(string, to, from)
+  end
+  class << self
+    alias_method :translate_without_cache, :translate
+    alias_method :translate, :translate_with_cache
+  end
+end
+
+# $KCODE = "UTF8"
+
+def deep_translate(value, locale)
+  if Hash === value
+    hash = {}
+    value.each do |k, v|
+      hash[k] = deep_translate(v, locale)
+    end
+    hash
+  else
+    str = GoogleApi.translate(value, locale, "en")
+    #str = "简体中文"
+    puts "#{value} ==> #{str}"
+    str
+  end
+end
+
+if (base_file = ARGV[0]) && (dest_locale = ARGV[1])
+  dest_file = ARGV[2] || "#{dest_locale}.yml"
+
+  puts "=== Translating en-US.yml into [#{dest_locale}]..."
+
+  translated = {}
+  locale_yml = YAML.load_file(base_file)
+  locale_yml.each do |key, value|
+    translated[key] = deep_translate(value, dest_locale)
+  end
+
+  File.open("#{dest_locale}.yml", 'w') do |f|
+    f.puts translated.ya2yaml
+  end
+
+  puts "===== Done."
+
+else
+  puts "translate_yml <base_locale_file> <dest_locale> (<dest_file>)"
+end

@@ -1,0 +1,7 @@
+#!/bin/bash
+for movie in `find -name '*.rm' -o -name '*.rmvb'`
+do
+echo "conv $movie to divx..."
+mencoder -srate 32000 -stereo 0 -oac mp3lame -lameopts mode=2:cbr:br=128 -ovc lavc -ffourcc DX50 -lavcopts vcodec=mpeg4:vbitrate=768 -ofps 24000/1001 $movie -o "$movie.avi"
+#rm -f "$movie"
+done 

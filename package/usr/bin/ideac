@@ -1,0 +1,3 @@
+#!/bin/bash
+export AWT_TOOLKIT=MToolkit
+/opt/idea/idea-IC-95.429/bin/idea.sh

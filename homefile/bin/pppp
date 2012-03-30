@@ -1,0 +1,2 @@
+#!/bin/bash
+pidgin -c ~/.purp1e &

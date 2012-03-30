@@ -1,0 +1,96 @@
+#!/bin/bash
+#
+# Startup script for Jakarta Tomcat
+#
+# chkconfig: - 88 14
+# description: Jakarta Tomcat Java Servlet/JSP Container
+
+
+TOMCAT_HOME=/opt/atlassian/apache-tomcat-6.0.29
+TOMCAT_STOP=$TOMCAT_HOME/bin/shutdown.sh
+TOMCAT_START=$TOMCAT_HOME/bin/startup.sh
+
+#Necessary environment variables
+export CATALINA_HOME=$TOMCAT_HOME
+export JAVA_HOME=/usr/lib/jvm/java-openjdk
+TOMCAT_USER=tomcat
+
+
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+# Source networking configuration.
+. /etc/sysconfig/network
+
+# Check that networking is up.
+[ ${NETWORKING} = "no" ] && exit 0
+
+#Check for tomcat script
+if [ ! -f $TOMCAT_HOME/bin/catalina.sh ]
+then
+    echo $TOMCAT_HOME/bin/catalina.sh
+    echo "Tomcat not available..."
+    exit
+fi
+
+start() {
+    echo "Starting Tomcat: "
+    rm -f /opt/atlassian/home/jira/.jira-home.lock
+    #daemon $TOMCAT_START
+    /bin/su - $TOMCAT_USER -s /bin/bash -c $TOMCAT_START
+    echo
+    touch /var/lock/subsys/tomcatd
+# We may need to sleep here so it will be up for apache
+#    sleep 5
+#Instead should check to see if apache is up by looking for http.pid
+}
+
+stop() {
+    echo $"Shutting down Tomcat: "
+    echo $TOMCAT_STOP
+    /bin/su - $TOMCAT_USER -s /bin/bash -c $TOMCAT_STOP
+    rm -f /var/lock/subsys/tomcatd.pid
+    sleep 5
+    #如果不能关闭tomcat时(tomcat有时的bug),调用以下代码#
+    pid=`ps aux |grep "java"|grep "tomcat6"|grep -v "grep"|awk '{print $2}'`
+    if [ "$pid" = "" ] ; then
+       echo "tomcat is shutdown now!"
+    else
+       echo "force kill tomcat'pid $pid now"
+       kill -9 $pid
+    fi
+
+}
+
+status() {
+    ps ax --width=1000 | grep "tomcat6" | grep -v "grep" | grep "[o]rg.apache.catalina.startup.Bootstrap start" | awk '{printf $1 " "}' | wc | awk '{print $2}' >/tmp/tomcat_process_count.txt
+    read line < /tmp/tomcat_process_count.txt
+if [ $line -gt 0 ]; then
+    echo -n "tomcatd ( pid "
+    ps ax --width=1000 | grep "tomcat6" | grep -v "grep" | grep "[o]rg.apache.catalina.startup.Bootstrap
+start" | awk '{printf $1 " "}'
+    echo ") is running..."
+else
+    echo "Tomcat is stopped"
+fi
+}
+
+case "$1" in
+    start)
+        start
+        ;;
+     stop)
+        stop
+        ;;
+     restart)
+        stop
+        sleep 3
+        start
+        ;;
+     status)
+        status
+        ;;
+     *)
+        echo "Usage: ／etc/init.d/tomcat {start|stop|restart|status}"
+     exit 1
+esac

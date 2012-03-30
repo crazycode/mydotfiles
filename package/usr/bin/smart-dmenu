@@ -1,0 +1,36 @@
+#!/bin/sh
+
+DMENU="dmenu -i"
+
+# 想办法把alias加入到CACHE就可以直接通过dmenu执行sshv2之类的命令了
+TERMI="urxvt -e zsh -lic"
+CACHE="$HOME/.dmenu_cache_recent"
+
+if [[ ! -f $CACHE ]]; then
+    # BUG: the $CACHE file must exists and contain at least 2 lines.
+    echo "emacs" > $CACHE
+    echo "firefox" >> $CACHE
+fi
+
+MOST_USED=`sort $CACHE | uniq -c | sort -r | colrm 1 8`
+RUN=`(echo "$MOST_USED"; dmenu_path | /bin/grep -vxF "$MOST_USED") | $DMENU` &&
+(echo $RUN; head -n 99 $CACHE) > $CACHE.$$ &&
+mv $CACHE.$$ $CACHE
+
+case $RUN in
+    *\;) exec `echo $TERMI $RUN | sed -e 's/;$//'`;;
+    *)   exec $RUN;;
+esac
+
+# Other version....
+
+# TERMI="urxvt -e sh -c"
+# CACHE="$HOME/.dmenu_cache_recent"
+#
+# MOST_USED=`sort $CACHE | uniq -c | sort -rn | colrm 1 8`
+# RUN=`(echo "$MOST_USED"; dmenu_path | grep -vxF "$MOST_USED") | dmenu "$@"` &&
+# (echo $RUN; head -n 99 $CACHE) > $CACHE.$$ && mv $CACHE.$$ $CACHE
+# case $RUN in
+#     *\;) exec $TERMI "$RUN";;
+#     *) exec $RUN;;
+# esac

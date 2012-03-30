@@ -1,0 +1,10 @@
+My dotfiles for linux.
+
+Install
+=======
+
+1. Install ruby and rake.
+
+2. run:
+
+    rake install

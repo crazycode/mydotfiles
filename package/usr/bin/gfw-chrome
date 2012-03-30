@@ -1,0 +1,2 @@
+#!/bin/bash
+google-chrome --single-process --proxy-server=socks5://127.0.0.1:7070

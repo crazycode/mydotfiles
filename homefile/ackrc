@@ -1,0 +1,6 @@
+--type-add=ruby=.erb
+--type-add=html=.html.erb
+--type-set=erb=.erb
+--type-set=haml=.haml
+--type-set=ruby=.rb,.rake,.rhtml,.erb,.rjs
+# --pager=less

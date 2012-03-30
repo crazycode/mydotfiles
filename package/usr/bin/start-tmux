@@ -1,0 +1,9 @@
+#!/bin/bash
+WM_TITLE="tmux-main"
+
+S2=`ps aux | grep tmux | grep -v start-tmux | grep -v grep | wc -l`
+if [ $S2 -eq '0' ]; then
+    xterm -title $WM_TITLE -e sh -c 'tmux -u' &
+else
+    xterm -title $WM_TITLE -e sh -c 'tmux -u a' &
+fi

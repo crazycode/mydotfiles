@@ -1,0 +1,155 @@
+#{{{---------------------------alias---------------------------------------
+# alias and listing colors
+alias -g A="|awk"
+alias -g C="|wc"
+alias -g E="|sed"
+alias -g G="|grep"
+alias -g H="|head"
+alias -g L="|less"
+alias -g R="|tac"
+alias -g S="|sort"
+alias -g T="|tail"
+alias -g X="|xargs"
+alias -g N="> /dev/null"
+
+#file types
+[[ -x /usr/bin/apvlv ]] && alias -s pdf=apvlv
+alias -s ps=gv
+for i in jpg png;           alias -s $i=gqview
+for i in avi rmvb wmv;      alias -s $i=mplayer
+for i in rar zip 7z lzma;   alias -s $i="7z x"
+
+export GREP_COLOR='31;1'
+#no correct for mkdir mv and cp
+for i in mkdir mv cp;       alias $i="nocorrect $i"
+
+alias f='find . -name'
+alias gemset='rvm gemset'
+alias r=rails
+alias vi=vim
+alias grep='grep -I --color=always'
+alias egrep='egrep -I --color=always'
+alias cal='cal -3m'
+alias ee='emacsclient -t'
+alias freeze='kill -STOP'
+alias ls='ls -h --color=auto -X --time-style="+[33m[[32m%Y-%m-%d [35m%k:%M[33m][m"'
+alias ll='ls -l'
+alias df='df -Th'
+alias du='du -h'
+alias psg='ps aux | grep'
+#show directories size
+alias dud='du -s *(/)'
+#date for US and CN
+alias adate='for i in US/Eastern Australia/{Brisbane,Sydney} Asia/{Hong_Kong,Singapore} Europe/Paris; do printf %-22s "$i:";TZ=$i date +"%m-%d %a %H:%M";done'
+#bloomberg radio
+alias bloomberg='mplayer mms://media2.bloomberg.com/wbbr_sirus.asf'
+#alias which='alias | /usr/bin/which --read-alias'
+alias pyprof='python -m cProfile'
+alias python='nice python'
+alias ri='ri -f ansi'
+alias history='history 1'       #zsh specific
+#alias mplayer='mplayer -cache 512'
+alias zhcon='zhcon --utf8'
+alias vless="/usr/share/vim/macros/less.sh"
+del() {mv -vif -- $* ~/.Trash}
+zhcat() {cat $* | iconv -f GBK }
+alias m='mutt'
+alias port='netstat -ntlp'      #opening ports
+alias e264='mencoder -vf harddup -ovc x264 -x264encopts crf=22:subme=5:frameref=2:8x8dct:bframes=3:weight_b:b_pyramid -oac mp3lame -lameopts aq=7:mode=0:vol=1.2:vbr=2:q=6 -srate 32000'
+#alias tree="tree --dirsfirst"
+alias top10='print -l  ${(o)history%% *} | uniq -c | sort -nr | head -n 10'
+alias tree="ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'"
+#alias tt="vim +'set spell' ~/doc/TODO.otl"
+alias mlychee="sshfs -p 2023 roy@lychee: /home/roylez/remote/lychee"
+alias gfw="ssh -o
+ServerAliveInterval=60 -CNfg -D 7777 -l roy lychee &>/dev/null &"
+#alias rtm="twitter d rtm"
+#alias rtorrent="screen rtorrent"
+
+# ================================================================
+
+alias sshf='ssh root@192.168.208.186'
+alias sshq='ssh ridge@git.spiker.cn'
+alias sshu='ssh ridge@173.45.238.135'
+alias sshv2='ssh root@58.32.208.202 -p 12922'
+
+alias ssh201='ssh -p 58622 tanglq@192.168.18.201'
+alias sshv201='ssh -p 58622 tanglq@116.247.84.186'
+
+alias ssh201='ssh -p 58622 tanglq@192.168.18.201'
+
+alias vssh35='CUR_DIR=`pwd`;cd /etc/sdo;proxychains ssh root@10.241.14.35 -p 22;cd $CUR_DIR'
+#alias sshp='ssh ridge@174.121.79.66'
+#alias ssha='ssh tanglq@10.241.34.14'
+
+alias sshp2='ssh pm02@10.241.14.138'
+alias sshp3='ssh pm03@10.241.14.165'
+alias sshp4='ssh test168@10.241.14.168'
+
+
+alias sshei='ssh tanglq@222.73.163.48'
+alias sshew='ssh ridge@222.73.163.47'
+alias sshe8='ssh root@222.73.163.46'
+
+alias vsshi='CUR_DIR=`pwd`;cd /etc/sdo;proxychains ssh tanglq@10.241.72.129 -p 58422;cd $CUR_DIR'
+alias sshi='ssh tanglq@10.241.72.129 -p 58422'
+
+alias sshp='ssh pm01@10.241.14.137'
+alias sshp2='ssh pm02@10.241.14.137'
+alias v22sshp='proxychains ssh pm01@10.241.14.137'
+alias vsshp='CUR_DIR=`pwd`;cd /etc/sdo;proxychains ssh pm01@10.241.14.137 -p 22;cd $CUR_DIR'
+alias vsshp2='CUR_DIR=`pwd`;cd /etc/sdo;proxychains ssh pm02@10.241.14.138 -p 22;cd $CUR_DIR'
+
+#alias sshtunnel='ssh -qTfnN -D 9002 crazycode@shell.cjb.net -p 22'
+#alias tunnelssh='ssh -qTfnN -D 7070 root@173.252.199.219'
+alias tunnelsdo='ssh -qTfnN -D 7071 tangliqun@10.241.12.38'
+
+# alias stfost='ssh -N -f -L 9001:192.168.129.2:80 tanglq@58.32.208.202 -p 12922'
+# alias stfost80='sudo ssh -N -f -L 80:192.168.129.2:80 tanglq@58.32.208.202 -p 12922'
+
+alias sshvps='ssh tanglq@railstek.net -p 58622'
+alias vpstunnel='ssh -qTfnN -D 7070 tanglq@railstek.net -p 58622'
+alias uhltunnel='ssh -qTfnN -D 7070 tanglq@116.247.84.186 -p 58622'
+
+alias s1='thin start -p 3001'
+alias s2='thin start -p 3002'
+alias s3='thin start -p 3003'
+alias s4='thin start -p 3004'
+alias sp1='thin start -p 4001 -e production'
+alias sp2='thin start -p 4002 -e production'
+alias sp3='thin start -p 4003 -e production'
+alias sp4='thin start -p 4004 -e production'
+
+alias mysqlm='mysql -u root -p -h 10.241.12.38 message'
+
+alias cdl='cd ~/kembo/loca-tion'
+alias cdd='cd ~/gitworks/spad'
+alias cdw='cd ~/gitworks/workmatrix'
+alias cds='cd ~/gitworks/spas'
+alias cdf='cd ~/gitworks/fostconfig'
+alias cdt='cd ~/github/teambox'
+alias cdx='cd ~/gitworks/xcbao'
+alias cdt='cd ~/github/teambox'
+alias cde='cd ~/gitworks/extoa'
+alias cdh='cd ~/gitworks/hawkeye'
+
+alias psjava='ps aux | grep java | grep -v grep'
+
+alias spad_screen='screen -c ~/.screen_profile.d/spad'
+
+
+# for jruby
+#alias jgem='jruby -S gem'
+#alias jrake='jruby -S rake'
+#alias jrails='jruby -S rails'
+
+
+alias sndavpn='sudo openconnect --script /etc/vpnc/vpnc-script https://webvpn.snda.com'
+alias uhlvpn='sudo openvpn --cd /etc/openvpn/uhl --config client.ovpn'
+alias rvpn='sudo openvpn --cd /etc/openvpn/rainux --config crazycode.ovpn'
+
+alias s='source reeb-run'
+alias sww='source reeb-run website/www'
+alias swh='source reeb-run website/www'
+alias sts='source reeb-run traders/sales'
+alias sto='source reeb-run traders/order'

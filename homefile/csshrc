@@ -1,0 +1,110 @@
+auto_quit=yes
+command=
+comms=ssh
+console_position=
+extra_cluster_file=
+history_height=10
+history_width=40
+key_addhost=Control-Shift-plus
+key_clientname=Alt-n
+key_history=Alt-h
+key_paste=Control-v
+key_quit=Control-q
+key_retilehosts=Alt-r
+max_addhost_menu_cluster_items=30
+max_host_menu_items=30
+menu_host_autotearoff=0
+menu_send_autotearoff=0
+method=ssh
+mouse_paste=Button-2
+rsh_args=
+screen_reserve_bottom=60
+screen_reserve_left=0
+screen_reserve_right=0
+screen_reserve_top=0
+send_menu_xml_file=/home/tanglq/.csshrc_send_menu
+show_history=0
+ssh=/usr/bin/ssh
+ssh_args= -x -o ConnectTimeout=10
+telnet_args=
+terminal=/usr/bin/xterm
+terminal_allow_send_events=-xrm '*.VT100.allowSendEvents:true'
+terminal_args=
+terminal_bg_style=dark
+terminal_colorize=1
+terminal_decoration_height=10
+terminal_decoration_width=8
+terminal_font=6x13
+terminal_reserve_bottom=0
+terminal_reserve_left=5
+terminal_reserve_right=0
+terminal_reserve_top=5
+terminal_size=80x24
+terminal_title_opt=-T
+title=CSSH
+unmap_on_redraw=no
+use_hotkeys=yes
+window_tiling=yes
+window_tiling_direction=right
+
+# 12.38:  数据库
+# 12.39:  openfire+connection manager+Oracle Conherence  临时mysql + mongodb + mymogodbadmin
+# 12.40:  openfire +connection manager
+#
+# 43:  Jetty(前台) + Nginx + MongoDB config
+# 44:  Jetty(前台) + MongoDB
+# 45: Jetty(前台) + MongoDB
+# 46: Jetty(前台) + MongoDB
+# 47: Jetty(后台) + MongoDB
+# 48: Jetty(后台) + Memcached(64M)
+# 49: Memcached(64M) + MongoDB config + 其它监控工具
+
+#    :58422
+#    WD#sd7258   mysql -u msg20_user  -p'Ucapi!3Z5B8&'
+# 10.150.10.124 10.150.1.30<11          唐力群          Web应用机：  1台 A2  memcache
+# 10.150.10.125 10.150.1.30<12          唐力群          Web应用机： 2 台 A2
+# 10.150.10.126 10.150.1.30<13          唐力群          Web应用机： 2 台 A2
+# 10.150.20.54  10.150.1.30<14          唐力群          MongoDB:  4台  C1 node1
+# 10.150.20.55  10.150.1.30<15          唐力群          MongoDB:  4台  C1
+# 10.150.20.56  10.150.1.30<16          唐力群          MongoDB:  4台  C1 node2
+# 10.150.20.57  10.150.1.30<25          唐力群          MongoDB:  4台  C1
+# 10.150.10.127 10.150.1.30<26          唐力群          Web应用机:  4台 W2
+# 10.150.10.128 10.150.1.30<27          唐力群          Web应用机:  4台 W2
+# 10.150.10.129 10.150.1.30<28          唐力群          Web应用机:  4台 W2
+# 10.150.10.130 10.150.1.30<29          唐力群          Web应用机:  4台 W2
+
+
+clusters=umongoall mongo1 mongo2 mongoconf mongodb frontapp backapp realmongo jobs ua2 umongo1 umongo2 umongo3 umongo4 umongo5 uw2 umongo uall uapp ujetty dmongo dmongo1 dmongo2 dmongo3 kjetty kmongo dcweb dcjob
+ua2=root@10.150.10.124:58422 root@10.150.10.125:58422 root@10.150.10.126:58422
+ujetty=root@10.150.10.124:58422 root@10.150.10.125:58422 root@10.150.10.126:58422 root@10.150.10.127:58422 root@10.150.10.128:58422 root@10.150.10.129:58422
+umongo1=root@10.150.20.54:58422 root@10.150.20.55:58422
+umongo2=root@10.150.20.56:58422 root@10.150.20.57:58422
+umongo3=root@10.150.10.138:58422 root@10.150.10.139:58422
+umongo4=root@10.150.10.140:58422 root@10.150.10.141:58422
+uw2=root@10.150.10.127:58422 root@10.150.10.128:58422 root@10.150.10.129:58422 root@10.150.10.130:58422
+ujetty=root@10.150.10.124:58422 root@10.150.10.125:58422 root@10.150.10.126:58422 root@10.150.10.127:58422 root@10.150.10.128:58422 root@10.150.10.129:58422
+uall=ua2 uw2 umongo1 umongo2
+uapp=ua2 uw2
+umongoall=umongo1 umongo2 umongo4 umongo5
+umongo=umongo1 umongo2 umongo3 umongo4
+
+kjetty=root@10.150.168.59:58422 root@10.150.168.60:58422 root@10.150.168.61:58422 root@10.150.168.62:58422
+kmongo=root@10.150.168.51:58422 root@10.150.168.52:58422 root@10.150.168.53:58422 root@10.150.168.54:58422 root@10.150.168.55:58422 root@10.150.168.56:58422 root@10.150.168.57:58422 root@10.150.168.58:58422
+
+dcweb=root@10.129.129.22:58422
+dcjob=root@10.127.57.51:58422 root@10.127.57.52:58422 root@10.127.57.53:58422 root@10.127.57.54:58422 root@10.127.57.55:58422 root@10.127.57.56:58422 root@10.127.57.57:58422 root@10.127.57.58:58422
+
+dmongo1=sujie@10.241.12.165
+dmongo2=sujie@10.241.12.166
+dmongo3=sujie@10.241.12.167
+dmongo=dmongo1 dmongo2 dmongo3
+
+jobs=tangliqun@10.241.12.43 tangliqun@10.241.12.48
+frontapp=tangliqun@10.241.12.43 tangliqun@10.241.12.44 tangliqun@10.241.12.45 tangliqun@10.241.12.46
+backapp=tangliqun@10.241.12.47 tangliqun@10.241.12.48
+mongo1=tangliqun@10.241.12.44 tangliqun@10.241.12.45
+mongo2=tangliqun@10.241.12.46 tangliqun@10.241.12.47
+mongoconf=tangliqun@10.241.12.43 tangliqun@10.241.12.49
+mongodb=mongo1 mongo2
+memcache=tangliqun@10.241.12.48 tangliqun@10.241.12.49
+realmongo=tangliqun@10.241.12.39 tangliqun@10.241.12.40

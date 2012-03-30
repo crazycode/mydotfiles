@@ -1,0 +1,7 @@
+cvs 	-z5
+log 	-N
+diff 	-upN
+update 	-d -P
+co 	-P
+export	-kv
+history -x TEWUCMR

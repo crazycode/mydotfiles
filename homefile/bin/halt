@@ -1,0 +1,11 @@
+#!/bin/bash
+echo "请确认有没有关闭显示器，支持7S，谢谢！"
+echo -n "确认已经关闭？(Y/n)"
+read choice
+
+if [ $choice == 'n' ]; then
+    exit 0
+else
+    echo "sudo shutdown -h now"
+fi
+

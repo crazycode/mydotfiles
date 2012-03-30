@@ -1,0 +1,88 @@
+[user]
+    name = <%= print("Your Name: "); STDOUT.flush; STDIN.gets.chomp %>
+    email = <%= print("Your Email: "); STDOUT.flush; STDIN.gets.chomp %>
+[alias]
+        a = add
+        ae = add -e
+        alias = "!git config --get-regexp '^alias\\.' | sed -e 's/^alias\\.//' -e 's/ / /'"
+        br = branch
+        b = branch
+        ba = branch -a
+        c = commit
+        ci = commit -a
+        ca = commit -v -a
+        co = checkout
+        cob = checkout -b
+        com = checkout master
+        cp = cherry-pick
+        count = shortlog -sn
+        d = diff
+        des = describe --tags
+        dc = diff --cached
+        dv = '!git diff -w "$@" | vim -R -'
+        f = fetch
+        l   = log
+        lc  = log --graph --pretty=format:'%Cred%h%Creset -%Cblue%cN%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
+        lg  = log --graph
+        lp = log --pretty=format:'%C(yellow bold)commit %H%Creset %C(yellow)tree %T%Creset%nAuthor: %an <%%ae>%nDate:   %ad%n%n%w(76,4,4)%s%n%n%-b%n'
+        m   = merge
+        rb = rebase
+        rbi = rebase -i
+        s = status
+        sm = submodule
+        st = status
+        g = log -p
+        p = push
+        pl  = pull
+        pu  = push
+        up = "!git fetch && git rebase"
+        s   = status
+        t   = tag
+        untrack = rm -r --cached
+
+[branch]
+        autosetuprebase = always
+
+[color]
+        diff = auto
+        status = auto
+        branch = auto
+        ui = true
+        grep = always
+        interactive = auto
+[color "diff"]
+        whitespace = red reverse
+[core]
+        excludesfile = ~/.gitignore
+        whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
+        autocrlf = input
+[diff]
+        tool = bc3
+[difftool "bc3"]
+        cmd = bcomp $LOCAL $REMOTE
+[difftool]
+        prompt = false
+[merge]
+        tool = bc3
+[mergetool "bc3"]
+        cmd = bcomp $LOCAL $REMOTE $BASE $MERGED
+        trustExitCode = true
+[format]
+#       pretty = %C(yellow)%h%Creset %s %C(red)(%cr)%Creset
+
+[push]
+        default = matching
+[interactive]
+        singlekey = true
+
+[url "git@github.com:"]
+        insteadOf = github:
+[url "git://github.com/"]
+        insteadOf = gitpub:
+[gui]
+        fontui = -family \"wenquanyi bitmap song\" -size 7 -weight bold -slant roman -underline 0 -overstrike 0
+        fontdiff = -family \"wenquanyi bitmap song\" -size 10 -weight normal -slant roman -underline 0 -overstrike 0
+
+[github]
+        user = <%= print("GitHub Username: "); STDOUT.flush; STDIN.gets.chomp %>
+        token = <%= print("GitHub API Token: "); STDOUT.flush; STDIN.gets.chomp %>

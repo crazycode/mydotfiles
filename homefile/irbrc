@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+# sudo gem install wirble map_by_method what_methods
+require 'rubygems'  
+require 'map_by_method'  
+require 'what_methods'  
+require 'wirble'  
+require 'irb/completion'  
+  
+IRB.conf[:AUTO_INDENT]=true  
+  
+class Regexp  
+  def show(a)  
+    a =~ self ? "#{$`}<<#{$&}>>#{$'}" : "no match"  
+  end  
+end  
+  
+Wirble.init  
+Wirble.colorize unless RbConfig::CONFIG['host_os'] == 'mswin32'  

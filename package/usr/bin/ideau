@@ -1,0 +1,4 @@
+#!/bin/bash
+export AWT_TOOLKIT=MToolkit
+export JDK_HOME=/usr/lib/jvm/java-6-openjdk
+/opt/idea/idea-IU-95.429/bin/idea.sh

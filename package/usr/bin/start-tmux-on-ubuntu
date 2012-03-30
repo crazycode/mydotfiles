@@ -1,0 +1,15 @@
+#!/bin/bash
+WM_TITLE="tmux_main"
+S1=`wmctrl -l|grep "$WM_TITLE"|wc -l`
+
+if [ $S1 -eq '0' ]; then
+    S2=`ps aux | grep tmux | grep -v start-tmux | grep -v grep | wc -l`
+    if [ $S2 -eq '0' ]; then
+        xterm -title $WM_TITLE -e sh -c 'tmux -u' &
+    else
+        xterm -title $WM_TITLE -e sh -c 'tmux -u a' &
+    fi
+    sleep 0.5
+fi
+wmctrl -a "$WM_TITLE"
+wmctrl -r "$WM_TITLE" -b add,maximized_horz,maximized_vert

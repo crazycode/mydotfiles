@@ -1,0 +1,12 @@
+#!/bin/bash
+
+WM_TITLE="Mozilla Firefox"
+
+S1=`wmctrl -l|grep "$WM_TITLE"|wc -l`
+
+if [ $S1 -eq '0' ]; then
+    firefox &
+    sleep 0.1
+fi
+wmctrl -a "$WM_TITLE"
+wmctrl -r "$WM_TITLE" -b add,maximized_horz,maximized_vert

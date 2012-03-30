@@ -1,0 +1,29 @@
+#!/usr/bin/env ruby
+
+require 'hirb'
+require 'yaml'
+
+Hirb.enable :pager => false
+
+class Object
+  def hirbify
+    Hirb::View.formatter.format_output(self) || inspect
+  end
+
+  def tapp(prefix = nil, &block)
+    block ||= lambda {|x| x }
+    tap do |x|
+      value = block[x].hirbify
+
+      if prefix
+        print prefix
+        if value.lines.count > 1
+          print ":\n"
+        else
+          print ": "
+        end
+      end
+      puts value
+    end
+  end
+end

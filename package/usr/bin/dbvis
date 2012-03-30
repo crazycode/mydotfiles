@@ -1,0 +1,3 @@
+#!/bin/zsh
+#export AWT_TOOLKIT=MToolkit
+/opt/DbVisualizer-7.0.7/dbvis

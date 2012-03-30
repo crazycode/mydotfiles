@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openbox_menu xmlns="http://openbox.org/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://openbox.org/                 file:///usr/share/openbox/menu.xsd">
+	<menu id="root-menu" label="Openbox 3">
+		<item label="Перейти в ~/">
+			<action name="Execute">
+				<execute>
+					pcmanfm
+				</execute>
+			</action>
+		</item>
+		<menu id="root-menu-603046" label="  Переход">
+			<item label="Картинки">
+				<action name="Execute">
+					<execute>
+						pcmanfm ~/Картинки
+					</execute>
+				</action>
+			</item>
+			<item label="Музыка">
+				<action name="Execute">
+					<execute>
+						pcmanfm ~/Музыка
+					</execute>
+				</action>
+			</item>
+			<item label="Документы">
+				<action name="Execute">
+					<execute>
+						pcmanfm ~/Документы
+					</execute>
+				</action>
+			</item>
+			<item label="Загрузки">
+				<action name="Execute">
+					<execute>
+						pcmanfm ~/Загрузки
+					</execute>
+				</action>
+			</item>
+			<item label="tmp">
+				<action name="Execute">
+					<execute>
+						pcmanfm /tmp
+					</execute>
+				</action>
+			</item>
+		</menu>
+		<menu id="root-menu-22231" label="  Мультимедиа">
+			<item label="Ыonata">
+				<action name="Execute">
+					<execute>
+						sonata
+					</execute>
+				</action>
+			</item>
+			<item label="SMPlayer">
+				<action name="Execute">
+					<execute>
+						smplayer
+					</execute>
+				</action>
+			</item>
+			<item label="WXcam">
+				<action name="Execute">
+					<execute>
+						wxcam
+					</execute>
+				</action>
+			</item>
+			<item label="gPodder">
+				<action name="Execute">
+					<execute>
+						gpodder
+					</execute>
+				</action>
+			</item>
+		</menu>
+		<!-- This requires the presence of the 'menu' package to work -->
+		<menu id="root-menu-731013" label="  Графика">
+			<item label="GIMP">
+				<action name="Execute">
+					<execute>
+						gimp
+					</execute>
+				</action>
+			</item>
+			<item label="XSane">
+				<action name="Execute">
+					<execute>
+						xsane
+					</execute>
+				</action>
+			</item>
+			<item label="Picasa">
+				<action name="Execute">
+					<execute>
+						picasa
+					</execute>
+				</action>
+			</item>
+		</menu>
+		<menu id="root-menu-32234" label="  Интернет">
+			<item label="Chrome">
+				<action name="Execute">
+					<execute>
+						chromium-browser
+					</execute>
+				</action>
+			</item>
+			<item label="Firefox">
+				<action name="Execute">
+					<execute>
+						firefox
+					</execute>
+				</action>
+			</item>
+			<item label="Psi">
+				<action name="Execute">
+					<execute>
+						psi
+					</execute>
+				</action>
+			</item>
+			<item label="Skype">
+				<action name="Execute">
+					<execute>
+						skype
+					</execute>
+				</action>
+			</item>
+		</menu>
+		<menu id="root-menu-143129" label="  Игры">
+			<item label="Duke 3D">
+				<action name="Execute">
+					<execute>
+						/home/nixer/.scripts/game_eduke32.sh
+					</execute>
+				</action>
+			</item>
+			<item label="X-moto">
+				<action name="Execute">
+					<execute>
+						/home/nixer/.scripts/game_xmoto.sh
+					</execute>
+				</action>
+			</item>
+			<item label="Phun">
+				<action name="Execute">
+					<execute>
+						phun
+					</execute>
+				</action>
+			</item>
+			<item label="Frozen bubble">
+				<action name="Execute">
+					<execute>
+						frozen-bubble
+					</execute>
+				</action>
+			</item>
+		</menu>
+		<separator/>
+		<item label="Leafpad">
+			<action name="Execute">
+				<execute>
+					leafpad
+				</execute>
+			</action>
+		</item>
+		<item label="SunBird">
+			<action name="Execute">
+				<execute>
+					sunbird
+				</execute>
+			</action>
+		</item>
+		<item label="  Dia">
+			<action name="Execute">
+				<execute>
+					dia
+				</execute>
+			</action>
+		</item>
+		<item label="  Geany">
+			<action name="Execute">
+				<execute>
+					geany
+				</execute>
+			</action>
+		</item>
+		<item label="Sakura">
+			<action name="Execute">
+				<execute>
+					sakura
+				</execute>
+			</action>
+		</item>
+		<item label="OpenOffice">
+			<action name="Execute">
+				<execute>
+					soffice
+				</execute>
+			</action>
+		</item>
+		<separator/>
+		<menu id="root-menu-4438" label="Плотность окна">
+			<item label="1               ">
+				<action name="Execute">
+					<execute>
+						transset-df 1
+					</execute>
+				</action>
+			</item>
+			<item label="0.9   ">
+				<action name="Execute">
+					<execute>
+						transset-df 0.9
+					</execute>
+				</action>
+			</item>
+			<item label="0.8">
+				<action name="Execute">
+					<execute>
+						transset-df 0.8
+					</execute>
+				</action>
+			</item>
+			<item label="0.7">
+				<action name="Execute">
+					<execute>
+						transset-df 0.7
+					</execute>
+				</action>
+			</item>
+			<item label="0.6">
+				<action name="Execute">
+					<execute>
+						transset-df 0.6
+					</execute>
+				</action>
+			</item>
+			<item label="0.5">
+				<action name="Execute">
+					<execute>
+						transset-df 0.5
+					</execute>
+				</action>
+			</item>
+			<item label="0.4">
+				<action name="Execute">
+					<execute>
+						transset-df 0.4
+					</execute>
+				</action>
+			</item>
+			<item label="0.3">
+				<action name="Execute">
+					<execute>
+						transset-df 0.3
+					</execute>
+				</action>
+			</item>
+			<item label="0.2">
+				<action name="Execute">
+					<execute>
+						transset-df 0.2
+					</execute>
+				</action>
+			</item>
+			<item label="0.1">
+				<action name="Execute">
+					<execute>
+						transset-df 0.1
+					</execute>
+				</action>
+			</item>
+			<item label="0">
+				<action name="Execute">
+					<execute>
+						transset-df 0
+					</execute>
+				</action>
+			</item>
+		</menu>
+		<menu id="client-list-menu"/>
+		<separator/>
+		<menu id="root-menu-764353" label="  Утилиты">
+			<item label="KeePassX">
+				<action name="Execute">
+					<execute>
+						keepassx
+					</execute>
+				</action>
+			</item>
+			<item label="HP Tray">
+				<action name="Execute">
+					<execute>
+						hp-toolbox
+					</execute>
+				</action>
+			</item>
+			<item label="xdiskusage">
+				<action name="Execute">
+					<execute>
+						xdiskusage
+					</execute>
+				</action>
+			</item>
+		</menu>
+		<menu id="root-menu-984251" label="  Настройки">
+			<item label="  OBmenu">
+				<action name="Execute">
+					<execute>
+						obmenu
+					</execute>
+				</action>
+			</item>
+			<item label="  OBConf">
+				<action name="Execute">
+					<execute>
+						obconf
+					</execute>
+				</action>
+			</item>
+			<item label="  OBTheme">
+				<action name="Execute">
+					<execute>
+						obtheme
+					</execute>
+				</action>
+			</item>
+			<item label="Выбор темы">
+				<action name="Execute">
+					<execute>
+						lxappearance
+					</execute>
+				</action>
+			</item>
+			<separator/>
+			<item label="Restart">
+				<action name="Restart"/>
+			</item>
+			<item label="Reconfigure">
+				<action name="Reconfigure"/>
+			</item>
+		</menu>
+		<menu id="root-menu-7236" label="  Команды">
+			<item label="композит вкл.">
+				<action name="Execute">
+					<execute>
+						xcompmgr
+					</execute>
+				</action>
+			</item>
+			<item label="композит выкл.">
+				<action name="Execute">
+					<execute>
+						killall xcompmgr
+					</execute>
+				</action>
+			</item>
+		</menu>
+		<separator/>
+		<item label="Блокировка экрана">
+			<action name="Execute">
+				<execute>
+					xlock -mode pacman
+				</execute>
+			</action>
+		</item>
+		<item label="Выход">
+			<action name="Exit">
+				<execute>
+					openbox-exit
+				</execute>
+			</action>
+		</item>
+	</menu>
+</openbox_menu>

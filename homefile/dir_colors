@@ -1,0 +1,282 @@
+# Configuration file for the color ls utility
+# This file goes in the /etc directory, and must be world readable.
+# You can copy this file to .dir_colors in your $HOME directory to override
+# the system defaults.
+
+# perl -e '$bl="\e[0m\e[40m\e[37m"; \
+#    for $r (0,) { for $g (0..255/6) { for $b (0..5) { \
+#        $c = ($g*6)+$b ; printf "\e[38;5;${c}m%03d$bl  ", $c;  \
+#	 print "\n" if (($c>=15)&&($c-15)%6==0 || ($c==7)a); \
+#    }}} ; print "\n";'
+#
+#  0..15			16 colors
+#  0, 95,135,175,215,255	colors
+#  8, 18, ... 238		grays
+
+
+# COLOR needs one of these arguments: 'tty' colorizes output to ttys, but not
+# pipes. 'all' adds color characters to all output. 'none' shuts colorization
+# off.
+COLOR tty
+
+# Extra command line options for ls go here.
+# Basically these ones are:
+#  -F = show '/' for dirs, '*' for executables, etc.
+#  -T 0 = don't trust tab spacing when formatting ls output.
+#  -b = better support for special characters
+OPTIONS  --color=auto -CF -SX -b -T 0
+
+# Below, there should be one TERM entry for each termtype that is colorizable
+TERM linux
+TERM console
+TERM con132x25
+TERM con132x30
+TERM con132x43
+TERM con132x60
+TERM con80x25
+TERM con80x28
+TERM con80x30
+TERM con80x43
+TERM con80x50
+TERM con80x60
+TERM xterm
+TERM rxvt
+TERM vt100
+
+# EIGHTBIT, followed by '1' for on, '0' for off. (8-bit output)
+EIGHTBIT 1
+
+# Below are the color init strings for the basic file types. A color init
+# string consists of one or more of the following numeric codes:
+# Attribute codes:
+# 00=none 01=bold 04=underscore 05=blink 07=reverse 08=concealed
+# Text color codes:
+# 30=black 31=red 32=green 33=yellow 34=blue 35=magenta 36=cyan 37=white
+# Background color codes:
+# 40=black 41=red 42=green 43=yellow 44=blue 45=magenta 46=cyan 47=white
+
+NORMAL		00		# global default, although everything should be something.
+FILE		00		# normal file
+DIR		01;32   	# directory
+LINK		00;36		# symbolic link
+FIFO		40;33		# pipe
+SOCK		01;35		# socket
+BLK		01;33		# block device driver
+CHR		01;33		# character device driver
+ORPHAN		01;31		# symlink to nonexistent file
+
+# List any file extensions like '.gz' or '.tar' that you would like ls
+# to colorize below. Put the extension, a space, and the color init string.
+# (and any comments you want to add after a '#')
+# Attribute codes:
+# 00=none 01=bold 04=underscore 05=blink 07=reverse 08=concealed
+# Text color codes:
+# 30=black 31=red 32=green 33=yellow 34=blue 35=magenta 36=cyan 37=white
+# Background color codes:
+# 40=black 41=red 42=green 43=yellow 44=blue 45=magenta 46=cyan 47=white
+
+##################################################################
+# Dark Gray: hidden or system
+.bak		01;30;38;5;238		# Backup files
+.chk		01;30;38;5;238		# Checkdisk fragments
+.~		01;30;38;5;238		# Emacs turds
+.db		01;30;38;5;238		# Windows thumbnail view turds
+#.log		01;30;38;5;243		# Log files
+.log		00;32			# Log files
+.sys		01;30;38;5;238		# device drivers
+
+##################################################################
+# Red:		Archives or Compressed
+
+.tar		00;31;38;5;88
+.tgz		00;31;38;5;88
+.taz		00;31;38;5;88
+.bz2		00;31;38;5;88
+.z		00;31;38;5;88
+.Z		00;31;38;5;88
+.gz		00;31;38;5;88
+
+.lha		00;31;38;5;52
+.lzh		00;31;38;5;52
+.hqx		00;31;38;5;52
+.sit		00;31;38;5;52
+.arc		00;31;38;5;52
+
+.rpm		00;31;38;5;124
+.deb		00;31;38;5;124
+.dmg		00;31;38;5;124
+.arj		00;31;38;5;124
+
+.zip		00;31;38;5;125
+.tar.gz		01;31;38;5;88
+.tar.bz2	00;31
+
+
+##################################################################
+# Green:	Executables
+# This is for files with execute permission:
+EXEC		00;32
+
+#.cmd		01;32
+.exe		01;32
+.com		01;32;38;5;22
+.bat		00;32;38;5;22
+.sh		01;32;38;5;28
+
+
+##################################################################
+# Blue:
+.jpg		01;33
+.jpeg		01;33
+.gif		01;33
+.tif		01;33
+.tiff		01;33
+.png		01;33
+.JPG		01;33
+.GIF		01;33
+.TIF		01;33
+.PNG		01;33
+
+.bmp		00;33
+.pcx		00;33
+.psp		00;33
+.ppm		00;33
+.tga		00;33
+.xbm		00;33
+.xpm		00;33
+.jfif		00;33
+.ico		00;33
+.icns		00;33
+
+.ai		00;33
+.psd		00;33
+.dxf		00;33		# Autodesk
+.svg		00;33		# Scalable Vector Graphics
+.eps		00;33		# Encapsulated Postscript
+.wmf		00;33		# Windows Metafile
+.cdr		00;33		# Corel Draw
+
+.kdelink	00;33;38;5;23
+.lnk    	00;33;38;5;23
+
+##################################################################
+# Yellow:
+
+.pfb		00;34
+.pfm		00;34
+.ttf		00;34
+.bdf		00;34
+.dfont		00;34
+.pcf.gz		00;34
+
+##################################################################
+# Magenta:	Images and Movies
+
+.mp3		01;35;38;5;134
+.ogg		01;35;38;5;134
+.wma		01;35;38;5;134
+.m4a		01;35;38;5;139
+.m4r		01;35;38;5;139
+.aac		01;35;38;5;139
+.mid		00;35
+.wav		00;35
+.au		00;35
+.aif		00;35
+.aiff		00;35
+.mod		00;35
+
+.mpg		01;35;38;5;169
+.avi		01;35;38;5;97
+.mov		01;35
+.qt		00;35
+.ra		01;35;38;5;53
+.ram		01;35;38;5;53
+.asf		01;35;38;5;53
+.fli		00;35;38;5;53
+.flc		00;35;38;5;53
+
+.rb		01;36		# Ruby
+
+
+
+##################################################################
+# Cyan:		Prog files
+
+.c		01;36		# C
+.C		01;36		# C++
+.cpp		01;36
+.h		00;36
+.H		00;36
+
+.pl		01;36		# Perl
+.pm		00;36
+.PL		00;36
+.py		01;36		# Python
+.pyc		00;36
+.i		00;36		# SWIG
+.sql		01;36		# SQL
+
+.rb 		01;36		# ruby
+.haml		01;37;38;5;80	# HTML and friends
+.sass		00;32;38;5;33
+.html.erb	00;37;38;5;80	# erb
+.yaml.erb  	01;37;38;5;85
+
+.vi		01;36		# LabView
+.js		01;36;38;5;44	# Javascript
+.jar		00;36;38;5;44	# Java
+.nb		01;36;38;5;38	# Mathematica
+.m		01;36;38;5;38	# Matlab
+
+.as		01;36;38;5;68	# Actionscript
+.mxml		01;36;38;5;68	# Flex
+.swf		00;36		# Flash
+.swc		00;36
+
+##################################################################
+# White:	Documents
+
+.txt		01;37
+.me		01;37
+.in		01;37
+.lst		01;37
+.1		01;37
+#.2		01;37
+#.3		01;37
+#.4		01;37
+#.5		01;37
+#.6		01;37
+.reg		01;37		# Windows Registry
+.ini		01;37
+
+
+.doc		01;37;38;5;138	# MS Office
+.dot		01;37;38;5;138
+.ppt		00;37;38;5;138
+.rtf		00;37;38;5;138
+.wri		00;37;38;5;138
+.ps		00;37;38;5;174	# Postscript
+.pdf		00;37;38;5;174	# Acrobat
+
+.xls		01;37;38;5;85
+.csv		01;37;38;5;85	# Comma separated Values
+.tsv		01;37;88	# Comma separated Values
+
+.yaml		01;37;38;5;85
+.yml		01;37;38;5;85
+
+.htm		01;37;38;5;80	# HTML and friends
+.html		01;37;38;5;80
+.css		00;37;38;5;80
+.dwt		01;37		# dreamweaver template
+.hlp		01;37		# Windows help
+.xml		01;37;38;5;186
+.xsl		01;37;38;5;186
+.dtd		01;37;38;5;186
+.kml		01;37;38;5;186
+.kmz		01;37;38;5;186
+.webloc		01;33
+
+
+.tex		01;37;38;5;128
+.dvi		01;37

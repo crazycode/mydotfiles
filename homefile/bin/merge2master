@@ -1,0 +1,6 @@
+#!/bin/bash
+CUR_BR=`git branch | grep "*"  | awk '{ print $2 }'`
+echo "Current Branch: $CUR_BR"
+git checkout master
+git merge $CUR_BR
+git checkout $CUR_BR
