@@ -384,7 +384,7 @@ globalkeys = awful.util.table.join(
     awful.key({modkey }, "o", function() awful.util.spawn( "smart-dmenu" ) end),
 
     -- CHANGE: 执行或转到Emacs所在的tag
-    awful.key({ modkey }, "e", function () run_or_raise("/usr/bin/emacs", { class = "Emacs" }) end),
+    awful.key({ modkey }, "e", function () run_or_raise("/usr/bin/emc", { class = "Emacs" }) end),
 
     -- Try IT!
     awful.key({ modkey }, "q",  revelation),
@@ -451,7 +451,7 @@ clientkeys = awful.util.table.join(
     awful.key({ modkey, "Shift"   }, "c",      function (c) c:kill()                         end),
     awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end),
-    awful.key({ modkey,           }, "o",      awful.client.movetoscreen                        ),
+    awful.key({ modkey, "Shift"   }, "o",      awful.client.movetoscreen                        ),
     awful.key({ modkey, "Shift"   }, "r",      function (c) c:redraw()                       end),
     awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end),
     awful.key({ modkey,           }, "n",
@@ -650,7 +650,7 @@ end
 util.run_once('dropbox', 'dropboxd')
 -- util.run_once('nm-applet')
 util.run_once('pidgin')
-util.run_once('gol')
+-- util.run_once('gol')
 
 -- run screen-saver when idle 10 minutes.
 util.run_once("xautolock -time 10 -locker 'xlock -lockdelay 15'")
