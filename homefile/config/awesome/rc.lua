@@ -603,6 +603,9 @@ awful.rules.rules = {
     -- "W"
     { rule = { class = "Google-chrome" },
       properties = { tag = tags[1][10], switchtotag = true, maximized_vertical = true, maximized_horizontal = true } },
+    { rule = { class = "Chromium" },
+      properties = { tag = tags[2][2], switchtotag = true, maximized_vertical = true, maximized_horizontal = true } },
+
     -- "F"
     { rule = { class = "Firefox" },
       properties = { tag = tags[1][11], switchtotag = true, maximized_vertical = true, maximized_horizontal = true } },
