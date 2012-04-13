@@ -44,11 +44,17 @@ terminal_title_opt=-T
 title=CSSH
 unmap_on_redraw=no
 use_hotkeys=yes
-window_tiling=yes
-window_tiling_direction=right
 
+#window_tiling=yes
+#window_tiling_direction=right
 
-clusters=devapp devplay
+# for awesome
+window_tiling=no
+
+# ================ clusters define ================
+clusters=devapp devplay jenkins
 
 devplay=root@192.168.18.223 root@192.168.18.224 root@192.168.18.225
 devapp=root@192.168.18.222 devplay
+
+jenkins=root@192.168.18.239 root@192.168.18.71 root@192.168.18.72 root@192.168.18.73 root@192.168.18.74 root@192.168.18.75
