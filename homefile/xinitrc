@@ -10,8 +10,11 @@
 # ...or the Window Manager of your choice
 
 
+# for fcitx, see: https://wiki.archlinux.org/index.php/Fcitx
+# eval `dbus-launch --sh-syntax --exit-with-session`
+
 ################  FCITX ################
-export XMODIFIERS=@im=fcitx
+export XMODIFIERS="@im=fcitx"
 #export GTK_IM_MODULE=xim
 #export QT_IM_MODULE=xim
 
