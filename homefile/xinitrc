@@ -11,12 +11,16 @@
 
 
 # for fcitx, see: https://wiki.archlinux.org/index.php/Fcitx
-# eval `dbus-launch --sh-syntax --exit-with-session`
+eval `dbus-launch --sh-syntax --exit-with-session`
 
 ################  FCITX ################
-export XMODIFIERS="@im=fcitx"
+#export XMODIFIERS="@im=fcitx"
 #export GTK_IM_MODULE=xim
 #export QT_IM_MODULE=xim
+
+export XIM=fcitx
+export XMODIFIERS=@im=fcitx
+export XIM_PROGRAM=fcitx
 
 export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
@@ -46,13 +50,14 @@ xmodmap ~/.Xmodmap 2>/dev/null
 
 # exec awesome
 DEFAULT_SESSION=awesome
-#exec /usr/bin/awesome >> ~/.cache/awesome/stdout 2>> ~/.cache/awesome/stderr
+exec /usr/bin/awesome >> ~/.cache/awesome/stdout 2>> ~/.cache/awesome/stderr
+#exec awesome
 
-case $1 in
-  awesome) exec awesome ;;
-  wmii) exec wmii ;;
-  openbox) exec openbox-session;;
+#case $1 in
+#  awesome) exec awesome ;;
+#  wmii) exec wmii ;;
+#  openbox) exec openbox-session;;
   # xmonad) exec xmonad ;;
-  *) exec $DEFAULT_SESSION ;;
-esac
+#  *) exec $DEFAULT_SESSION ;;
+#esac
 
