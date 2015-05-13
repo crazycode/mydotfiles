@@ -4504,14 +4504,14 @@ if [[ -d $HOME/.zsh.d ]]; then
   done
 fi
 
-
+export JAVA_HOME=/opt/jdk8
 export M2_HOME=/opt/maven
 export MAVEN_OPTS="-Dmaven.artifact.threads=3 -Xmx768m"
-export PATH=$PATH:$M2_HOME/bin
+export PATH=$JAVA_HOME/bin:$PATH:$M2_HOME/bin
 
 
 export BUILD_ENV_CODE=linuxdev
 
-# [[ -s "/usr/local/rvm/scripts/rvm" ]] && source "/usr/local/rvm/scripts/rvm"
+export PATH="$HOME/.rvm/bin:$PATH" # Add RVM to PATH for scripting
 
 umask 022
