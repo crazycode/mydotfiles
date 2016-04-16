@@ -4504,6 +4504,7 @@ if [[ -d $HOME/.zsh.d ]]; then
   done
 fi
 
+alias v=vagrant
 
 export M2_HOME=/opt/maven
 export MAVEN_OPTS="-Dmaven.artifact.threads=3 -Xmx768m"
